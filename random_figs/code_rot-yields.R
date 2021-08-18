@@ -1,0 +1,93 @@
+# author: gina
+# created: 8/16/2021
+# purpose: yield examples
+# last updated: 
+
+rm(list = ls())
+
+library(tidyverse)
+
+#--getting the path of your current open file
+current_path = rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path))
+curdir <- paste(getwd())
+
+source("talk-palette.R")
+
+theme_set(theme_bw())
+
+mytheme <- 
+  theme(legend.justification = c(1,1),
+        legend.position = c(1,1),
+        legend.background = element_blank(),
+        legend.text = element_text(size = rel(1.5)),
+        strip.text = element_text(size = rel(1.5)),
+        axis.text = element_text(size = rel(1.3)),
+        axis.title = element_text(size = rel(1.5)))
+
+
+
+yld_lab <- (expression(atop("Corn Yield", paste("(Mg "~ha^-1*")"))))
+
+
+
+# data --------------------------------------------------------------------
+
+dat <-
+  tibble(rot = c("Continuous Corn", "Alternated Corn", "Rotated Corn"),
+       yld = c(9, 10, 10.5)) %>% 
+  mutate(rot = fct_inorder(rot)) 
+
+
+# fig ---------------------------------------------------------------------
+
+bu1 <- expression("180 bu "~ha^-1*"")
+bu2 <- expression("200 bu "~ha^-1*"")
+bu3 <- expression("210 bu "~ha^-1*"")
+
+mg1 <- expression("9 Mg "~ha^-1*"")
+mg2 <- expression("10 Mg "~ha^-1*"")
+mg3 <- expression("10.5 Mg "~ha^-1*"")
+
+
+# bu and Mg ---------------------------------------------------------------
+
+dat %>% 
+  ggplot(aes(rot, yld)) + 
+  geom_col(aes(fill = rot), color = "black") + 
+  scale_fill_manual(values = c(clr_cc, clr_rot, clr_div)) +
+  #--bu/ac
+  geom_text(aes(x = "Continuous Corn",
+                y = 9.5),
+                label = bu1, 
+            parse = T, check_overlap = T, size = 7) +
+  geom_text(aes(x = "Alternated Corn",
+                y = 10.5),
+            label = bu2, 
+            parse = T, check_overlap = T, size = 7) +
+  geom_text(aes(x = "Rotated Corn",
+                y = 11),
+            label = bu3, 
+            parse = T, check_overlap = T, size = 7) +
+  #--bu/ac
+  geom_text(aes(x = "Continuous Corn",
+                y = 8.5),
+            label = mg1, 
+            parse = T, check_overlap = T, size = 7, color = "gray60") +
+  geom_text(aes(x = "Alternated Corn",
+                y = 9.5),
+            label = mg2, 
+            parse = T, check_overlap = T, size = 7, color = "gray60") +
+  geom_text(aes(x = "Rotated Corn",
+                y = 10),
+            label = mg3, 
+            parse = T, check_overlap = T, size = 7, color = "gray60") +
+  guides(fill = F) + 
+  labs(y = yld_lab, 
+       x = NULL) +
+  mytheme +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0.5),
+        panel.grid = element_blank(),
+        axis.text.x = element_text(size = rel(1.5)))
+
+ggsave("fig_rot-ylds-bu-Mg.png", width = 10.3, height = 5.65)  
