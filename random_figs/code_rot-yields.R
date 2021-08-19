@@ -51,7 +51,7 @@ mg3 <- expression("10.5 Mg "~ha^-1*"")
 
 dat %>% 
   ggplot(aes(rot, yld)) + 
-  geom_col(aes(fill = rot), color = "black") + 
+  geom_col(aes(fill = rot), color = "black", width = 0.6) + 
   scale_fill_manual(values = c(clr_cc, clr_rot, clr_div)) +
   #--bu/ac
   geom_text(aes(x = "Continuous Corn",
@@ -88,3 +88,4 @@ dat %>%
         axis.text.x = element_text(size = rel(1.5)))
 
 ggsave("random_figs/fig_rot-ylds-bu-Mg.png", width = 10.3, height = 5.65)  
+
