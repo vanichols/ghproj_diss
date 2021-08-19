@@ -7,11 +7,6 @@
 rm(list = ls())
 #devtools::install_github("femiguez/nlraa")
 
-#--getting the path of your current open file
-current_path = rstudioapi::getActiveDocumentContext()$path 
-setwd(dirname(current_path))
-curdir <- paste(getwd())
-
 library(tidysawyer2) 
 library(tidyverse)
 library(saapsim)
@@ -23,7 +18,7 @@ library(ggrepel)
 
 theme_set(theme_bw())
 
-source("talk-palette.R")
+source("random_figs/talk-palette.R")
 
 
 # map ---------------------------------------------------------------------
@@ -57,5 +52,5 @@ ggplot() +
         legend.position = c(0.1, 0.1),
         legend.background = element_rect(color = "black"))
 
-ggsave("fig_map-of-sites.png", height = 3.5,
+ggsave("random_figs/fig_map-of-sites.png", height = 3.5,
        width = 7.5)

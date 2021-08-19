@@ -7,12 +7,7 @@ rm(list = ls())
 
 library(tidyverse)
 
-#--getting the path of your current open file
-current_path = rstudioapi::getActiveDocumentContext()$path 
-setwd(dirname(current_path))
-curdir <- paste(getwd())
-
-source("talk-palette.R")
+source("random_figs/talk-palette.R")
 
 theme_set(theme_bw())
 
@@ -30,7 +25,7 @@ mytheme <-
 # data --------------------------------------------------------------------
 
 prds <- 
-  read_csv("fc_leach-preds-eu.csv") 
+  read_csv("random_figs/fc_leach-preds-eu.csv") 
 
 nl_prds <- 
   prds %>% 
@@ -115,7 +110,7 @@ f_dat2 %>%
   mytheme + 
   facet_grid(.~rot_nice)
 
-ggsave("fig_nitrate-risk.png", width = 11, height = 5.6)
+ggsave("random_figs/fig_nitrate-risk.png", width = 11, height = 5.6)
 
 
 # fig 2 ---------------------------------------------------------------------
@@ -176,4 +171,4 @@ f_dat22 %>%
   mytheme + 
   facet_grid(.~rot_nice)
 
-ggsave("fig_nitrate-risk.png", width = 11, height = 5.6)
+ggsave("random_figs/fig_nitrate-risk.png", width = 11, height = 5.6)
