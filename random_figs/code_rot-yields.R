@@ -31,9 +31,10 @@ yld_lab <- (expression(atop("Corn Yield", paste("(Mg "~ha^-1*")"))))
 # data --------------------------------------------------------------------
 
 dat <-
-  tibble(rot = c("Continuous Corn", "2-year Rotation", "4-year Rotation"),
+  tibble(rot = c("Continuous\nCorn", "2-year\nRotation", "4-year\nRotation"),
        yld = c(9, 10, 10.5)) %>% 
-  mutate(rot = fct_inorder(rot)) 
+  mutate(rot = fct_inorder(rot),
+         rot = fct_rev(rot)) 
 
 
 # fig ---------------------------------------------------------------------
@@ -52,33 +53,33 @@ mg3 <- expression("10.5 Mg "~ha^-1*"")
 dat %>% 
   ggplot(aes(rot, yld)) + 
   geom_col(aes(fill = rot), color = "black", width = 0.6) + 
-  scale_fill_manual(values = c(clr_cc, clr_rot, clr_div)) +
+  scale_fill_manual(values = c(clr_div, clr_rot, clr_cc)) +
   #--bu/ac
-  geom_text(aes(x = "Continuous Corn",
-                y = 9.5),
-                label = bu1, 
-            parse = T, check_overlap = T, size = 7) +
-  geom_text(aes(x = "2-year Rotation",
-                y = 10.5),
-            label = bu2, 
-            parse = T, check_overlap = T, size = 7) +
-  geom_text(aes(x = "4-year Rotation",
-                y = 11),
-            label = bu3, 
-            parse = T, check_overlap = T, size = 7) +
-  #--bu/ac
-  geom_text(aes(x = "Continuous Corn",
+  geom_text(aes(x = "Continuous\nCorn",
                 y = 8.5),
-            label = mg1, 
-            parse = T, check_overlap = T, size = 7, color = "gray60") +
-  geom_text(aes(x = "2-year Rotation",
+            label = bu1, 
+            parse = T, check_overlap = T, size = 6, color = "gray60") +
+  geom_text(aes(x = "2-year\nRotation",
                 y = 9.5),
-            label = mg2, 
-            parse = T, check_overlap = T, size = 7, color = "gray60") +
-  geom_text(aes(x = "4-year Rotation",
+            label = bu2, 
+            parse = T, check_overlap = T, size = 6, color = "gray60") +
+  geom_text(aes(x = "4-year\nRotation",
                 y = 10),
+            label = bu3, 
+            parse = T, check_overlap = T, size = 6, color = "gray60") +
+  #--mg/ha
+  geom_text(aes(x = "Continuous\nCorn",
+                y = 9.5),
+            label = mg1, 
+            parse = T, check_overlap = T, size = 7) +
+  geom_text(aes(x = "2-year\nRotation",
+                y = 10.5),
+            label = mg2, 
+            parse = T, check_overlap = T, size = 7) +
+  geom_text(aes(x = "4-year\nRotation",
+                y = 11),
             label = mg3, 
-            parse = T, check_overlap = T, size = 7, color = "gray60") +
+            parse = T, check_overlap = T, size = 7) +
   guides(fill = F) + 
   labs(y = yld_lab, 
        x = NULL) +
@@ -88,5 +89,5 @@ dat %>%
         axis.text.x = element_text(size = rel(1.5)))
 
 
-ggsave("random_figs/fig_rot-ylds-bu-Mg.png", width = 10.3, height = 5.65)  
+ggsave("random_figs/fig_rot-ylds-bu-Mg.png", width = 8.8, height = 6.7)  
 
