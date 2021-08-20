@@ -33,19 +33,18 @@ yld_lab <- (expression(atop("Corn Yield", paste("(Mg "~ha^-1*")"))))
 dat <-
   tibble(rot = c("Continuous\nCorn", "2-year\nRotation", "4-year\nRotation"),
        yld = c(9, 10, 10.5)) %>% 
-  mutate(rot = fct_inorder(rot),
-         rot = fct_rev(rot)) 
+  mutate(rot = fct_inorder(rot)) 
 
 
 # fig ---------------------------------------------------------------------
 
-bu1 <- expression("180 bu "~ac^-1*"")
-bu2 <- expression("200 bu "~ac^-1*"")
-bu3 <- expression("210 bu "~ac^-1*"")
+bu1 <- expression("180 bu"~ac^-1*"")
+bu2 <- expression("200 bu"~ac^-1*"")
+bu3 <- expression("210 bu"~ac^-1*"")
 
-mg1 <- expression("9 Mg "~ha^-1*"")
-mg2 <- expression("10 Mg "~ha^-1*"")
-mg3 <- expression("10.5 Mg "~ha^-1*"")
+mg1 <- expression("9 Mg"~ha^-1*"")
+mg2 <- expression("10 Mg"~ha^-1*"")
+mg3 <- expression("10.5 Mg"~ha^-1*"")
 
 
 # bu and Mg ---------------------------------------------------------------
@@ -53,7 +52,7 @@ mg3 <- expression("10.5 Mg "~ha^-1*"")
 dat %>% 
   ggplot(aes(rot, yld)) + 
   geom_col(aes(fill = rot), color = "black", width = 0.6) + 
-  scale_fill_manual(values = c(clr_div, clr_rot, clr_cc)) +
+  scale_fill_manual(values = c(clr_cc, clr_rot, clr_div)) +
   #--bu/ac
   geom_text(aes(x = "Continuous\nCorn",
                 y = 8.5),
