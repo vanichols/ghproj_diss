@@ -31,16 +31,16 @@ yld_lab <- (expression(atop("Corn Yield", paste("(Mg "~ha^-1*")"))))
 # data --------------------------------------------------------------------
 
 dat <-
-  tibble(rot = c("Continuous Corn", "Rotated Corn", "Long-rotation Corn"),
+  tibble(rot = c("Continuous Corn", "2-year Rotation", "4-year Rotation"),
        yld = c(9, 10, 10.5)) %>% 
   mutate(rot = fct_inorder(rot)) 
 
 
 # fig ---------------------------------------------------------------------
 
-bu1 <- expression("180 bu "~ha^-1*"")
-bu2 <- expression("200 bu "~ha^-1*"")
-bu3 <- expression("210 bu "~ha^-1*"")
+bu1 <- expression("180 bu "~ac^-1*"")
+bu2 <- expression("200 bu "~ac^-1*"")
+bu3 <- expression("210 bu "~ac^-1*"")
 
 mg1 <- expression("9 Mg "~ha^-1*"")
 mg2 <- expression("10 Mg "~ha^-1*"")
@@ -58,11 +58,11 @@ dat %>%
                 y = 9.5),
                 label = bu1, 
             parse = T, check_overlap = T, size = 7) +
-  geom_text(aes(x = "Rotated Corn",
+  geom_text(aes(x = "2-year Rotation",
                 y = 10.5),
             label = bu2, 
             parse = T, check_overlap = T, size = 7) +
-  geom_text(aes(x = "Long-rotation Corn",
+  geom_text(aes(x = "4-year Rotation",
                 y = 11),
             label = bu3, 
             parse = T, check_overlap = T, size = 7) +
@@ -71,11 +71,11 @@ dat %>%
                 y = 8.5),
             label = mg1, 
             parse = T, check_overlap = T, size = 7, color = "gray60") +
-  geom_text(aes(x = "Rotated Corn",
+  geom_text(aes(x = "2-year Rotation",
                 y = 9.5),
             label = mg2, 
             parse = T, check_overlap = T, size = 7, color = "gray60") +
-  geom_text(aes(x = "Long-rotation Corn",
+  geom_text(aes(x = "4-year Rotation",
                 y = 10),
             label = mg3, 
             parse = T, check_overlap = T, size = 7, color = "gray60") +
@@ -86,6 +86,7 @@ dat %>%
   theme(axis.title.y = element_text(angle = 0, vjust = 0.5),
         panel.grid = element_blank(),
         axis.text.x = element_text(size = rel(1.5)))
+
 
 ggsave("random_figs/fig_rot-ylds-bu-Mg.png", width = 10.3, height = 5.65)  
 
