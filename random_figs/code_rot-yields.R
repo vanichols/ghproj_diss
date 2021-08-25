@@ -24,7 +24,7 @@ mytheme <-
 
 
 
-yld_lab <- (expression(atop("Corn Yield", paste("(Mg "~ha^-1*")"))))
+yld_lab <- (expression(atop("Corn Yield", paste("(Mg"~ha^-1*")"))))
 
 
 
@@ -57,15 +57,15 @@ dat %>%
   geom_text(aes(x = "Continuous\nCorn",
                 y = 8.5),
             label = bu1, 
-            parse = T, check_overlap = T, size = 6, color = "gray60") +
+            parse = T, check_overlap = T, size = 6, color = "black") +
   geom_text(aes(x = "2-year\nRotation",
                 y = 9.5),
             label = bu2, 
-            parse = T, check_overlap = T, size = 6, color = "gray60") +
+            parse = T, check_overlap = T, size = 6, color = "white") +
   geom_text(aes(x = "4-year\nRotation",
                 y = 10),
             label = bu3, 
-            parse = T, check_overlap = T, size = 6, color = "gray60") +
+            parse = T, check_overlap = T, size = 6, color = "white") +
   #--mg/ha
   geom_text(aes(x = "Continuous\nCorn",
                 y = 9.5),
